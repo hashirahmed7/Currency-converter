@@ -1,0 +1,30 @@
+import streamlit as st
+
+# Title of the app
+st.title("Currency Converter (PKR to USD, GBP, CNY, RUB, INR)")
+
+# Predefined conversion rates (You can replace with live API in real-world scenarios)
+exchange_rates = {
+    "USA (USD)": 279.50,  # Example conversion rate from PKR to USD
+    "UK (GBP)": 353.16,   # Example conversion rate from PKR to GBP
+    "China (CNY)":38.56,  # Example conversion rate from PKR to CNY
+    "Russia (RUB)": 3.16,  # Example conversion rate from PKR to RUB
+    "India (INR)": 3.23   # Example conversion rate from PKR to INR
+}
+
+# Input field for Pakistani Rupees (PKR)
+pkr_amount = st.number_input("Enter amount in Pakistani Rupees (PKR):", min_value=1.0, format="%.2f")
+
+# Dropdown to select target currency
+currency_to = st.selectbox("Select the target currency:", ["USA (USD)", "UK (GBP)", "China (CNY)", "Russia (RUB)", "India (INR)"])
+
+# Button to convert currency
+if st.button("Convert"):
+    if pkr_amount > 0:
+        # Perform conversion
+        converted_amount = pkr_amount * exchange_rates[currency_to]
+        
+        # Display the result
+        st.write(f"{pkr_amount} PKR is equal to {converted_amount:.2f} {currency_to}")
+    else:
+        st.error("Please enter a valid amount greater than 0 PKR.")
